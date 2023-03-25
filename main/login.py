@@ -89,8 +89,8 @@ def user_login():
 
 
     user_count = 0
-    user_name = ""
-    Login = "False"
+    user_details = ""
+    login = "False"
 
     for user in names_list:
     # Compare the computed face encoding with the stored face encodings for the user
@@ -101,7 +101,7 @@ def user_login():
             # Check if the minimum distance is less than a threshold
             if min_distance < 20:
                 user_count = 1
-                user_name = user
+                user_details = user
                 print("Accessed")
                 break
             else:
@@ -112,7 +112,7 @@ def user_login():
     if user_count > 0:
         login = "True"
         # If the distance is less than the threshold, the user is authenticated
-        print("Login Successfully\nWelcome, " + user_name)
+        print("Login Successfully\nWelcome, " + user_details)
         
     else:
         login = "False"
@@ -121,5 +121,5 @@ def user_login():
     cap.release()
     cv2.destroyAllWindows()
 
-    return user_name, login
+    return user_details, login
             

@@ -9,7 +9,12 @@ def user_register():
     cap = cv2.VideoCapture(0)
 
     # Ask the user for their name
-    name = input("Please enter your name: ")
+    name = input("Enter your name: ")
+    mobile = input("Enter your Mobile Number: ")
+
+    name_mobile = name+"-"+mobile
+
+    print(name_mobile)
 
     # Create a face detector
     face_cascade = cv2.CascadeClassifier("./haarcascade/haarcascade_frontalface_default.xml")
@@ -31,7 +36,6 @@ def user_register():
             # Capture a frame from the video feed
             if (count*frames)%frames==0:
                 print(count)
-                count+=1
                 # Convert the frame from BGR color to grayscale
                 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -40,6 +44,7 @@ def user_register():
 
                 # Loop through each face found in the frame
                 for (x, y, w, h) in faces:
+                    count+=1
                     # Extract the face region of interest (ROI)
                     face_roi = gray[y:y+h, x:x+w]
 
@@ -74,7 +79,7 @@ def user_register():
 
     # Save the face encoding with the user's name to a file
     with open("known_faces.txt", "a") as f:
-        f.write(name + "," + str(face_encoding.tolist()) + "\n")
+        f.write(name_mobile + "," + str(face_encoding.tolist()) + "\n")
 
     # Train a model using the face encodings
     # ...
